@@ -1,7 +1,7 @@
 {
-    "name": "KSR030",
-    "version": "0.5.0",
-    "description": "Extension for KAISE KSRobot KSR030 Robot",
+    "name": "KSB048",
+    "version": "0.1.0",
+    "description": "Extension for KAISE KSRobot KSB048 4ch Motor Board",
     "license": "MIT", 
     "dependencies": {
         "core": "*",
@@ -10,7 +10,7 @@
     "files": [
         "main.ts",
         "README.md",
-        "_locales/zh/KSR030-strings.json" 
+        "_locales/zh/KSB048-strings.json" 
         
     ],
     "testFiles": [

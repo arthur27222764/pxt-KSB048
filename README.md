@@ -1,8 +1,5 @@
-# KSR030 Robot Kit
-KAISE KSRobot KSR030 micro:bit Robot Kit\
-KSR030 仿生自走獸\
-[http://ksr030.kaise.com.tw](http://ksr030.kaise.com.tw)\
-![image](images/ksr030.png)
+# KSB048 4ch Motor Board
+KAISE KSRobot KSB048 4ch Motor Servo Board\
 
 ## User Guide 
 ![image](images/block.png)

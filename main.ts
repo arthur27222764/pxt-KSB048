@@ -1,8 +1,8 @@
 /**
- * KSR030 V0.010
+ * KSB048 V0.010
  */
-//% weight=10 color=#00A6F0 icon="\uf085" block="KSR030"
-namespace KSR030 {
+//% weight=10 color=#00A6F0 icon="\uf085" block="KSB048"
+namespace KSB048 {
     
     const SERVOMIN = 104 // this is the 'minimum' pulse length count (out of 4096)
     const SERVOMAX = 510 // this is the 'maximum' pulse length count (out of 4096)
@@ -135,7 +135,7 @@ namespace KSR030 {
         return x;
     }
 
-    //% blockId=KSR030_Ultrasonic 
+    //% blockId=KSB048_Ultrasonic 
     //% block="Ultrasonic(cm)"
     //% weight=98
     export function Ultrasonic(): number {
@@ -156,7 +156,7 @@ namespace KSR030 {
     }
 
     
-    //% blockId=KSR030_Track
+    //% blockId=KSB048_Track
     //% block="Track Sensor %sensor"
     //% weight=97
     export function Read_Track(sensor:Track):number{
@@ -172,7 +172,7 @@ namespace KSR030 {
         } 
     }
 
-    //% blockId="KSR030_RGB" 
+    //% blockId="KSB048_RGB" 
     //% block="RGB LED "
     //% weight=96
     export function RGB_LED(): neopixel.Strip {
@@ -185,11 +185,11 @@ namespace KSR030 {
     }
 
     /**
-     * Used to move the given servo to the specified degrees (0-180) connected to the KSR030
+     * Used to move the given servo to the specified degrees (0-180) connected to the KSB048
      * @param channel The number (1-16) of the servo to move
      * @param degrees The degrees (0-180) to move the servo to 
      */
-    //% blockId=KSR030_Servo
+    //% blockId=KSB048_Servo
     //% block="Servo channel %channel|degrees %degree"
     //% weight=86
     //% degree.min=0 degree.max=180
@@ -211,13 +211,13 @@ namespace KSR030 {
     }
     
 	/**
-     * Used to move the given servo to the specified degrees (0-180) connected to the KSR030
+     * Used to move the given servo to the specified degrees (0-180) connected to the KSB048
      * @param channel The number (1-16) of the servo to move
      * @param degrees The degrees (0-180) to move the servo to
      * @param servomin 'minimum' pulse length count ; eg: 112
      * @param servomax 'maximum' pulse length count ; eg: 491
      */
-    //% blockId=KSR030_ServoRange
+    //% blockId=KSB048_ServoRange
     //% block="Servo channel %channel|degrees %degree|servomin %servomin|servomax %servomax"
     //% degree.min=0 degree.max=180
 	export function ServoRange(channel: ServoNum, degree: number, servomin: number, servomax: number): void {
@@ -236,7 +236,7 @@ namespace KSR030 {
 
     }
 
-    //% blockId=KSR030_Motor 
+    //% blockId=KSB048_Motor 
     //% block="Motor channel %channel|speed %speed"
 	//% weight=85
 	//% speed.min=-255 speed.max=255
@@ -259,7 +259,7 @@ namespace KSR030 {
             
     }
 
-    //% blockId=KSR030_Servo_Car
+    //% blockId=KSB048_Servo_Car
     //% block="Servo_Car %index|L_speed %lspeed|R_speed %rspeed"
     //% weight=88
     //% lspeed.min=0 lspeed.max=90 rspeed.min=0 rspeed.max=90
@@ -305,7 +305,7 @@ namespace KSR030 {
         }
     }
 
-    //% blockId=KSR030_Motor_Car
+    //% blockId=KSB048_Motor_Car
     //% block="Motor_Car %index|L_speed %lspeed|R_speed %rspeed"
     //% weight=87
     //% lspeed.min=0 lspeed.max=255 rspeed.min=0 rspeed.max=255
