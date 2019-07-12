@@ -40,12 +40,7 @@ namespace KSB048 {
 		R_LED = 1,
 
     }
-    export enum Track{
-        //% blockId="TrackLeft" block="Left"
-        Left=0,
-        //% blockId="TrackRight" block="Right"
-        Right=1,
-    }
+    
 
     export enum RunState {
         //% blockId="Go_Forward" block="Forward"
@@ -155,23 +150,7 @@ namespace KSB048 {
         return Math.idiv(d, 58);
     }
 
-    
-    //% blockId=KSB048_Track
-    //% block="Track Sensor %sensor"
-    //% weight=97
-    export function Read_Track(sensor:Track):number{
-        if(!initialized){
-			init()
-		}
-        if(sensor==Track.Left){
-            return pins.digitalReadPin(DigitalPin.P12)
-        }else if(sensor==Track.Right){
-            return pins.digitalReadPin(DigitalPin.P8)
-        }else{
-            return -1
-        } 
-    }
-
+ 
     //% blockId="KSB048_RGB" 
     //% block="RGB LED "
     //% weight=96
@@ -258,86 +237,6 @@ namespace KSB048 {
         }
             
     }
-
-    //% blockId=KSB048_Servo_Car
-    //% block="Servo_Car %index|L_speed %lspeed|R_speed %rspeed"
-    //% weight=88
-    //% lspeed.min=0 lspeed.max=90 rspeed.min=0 rspeed.max=90
-    export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-        let l_pulselen=0;
-        let r_pulselen=0;
-        if(!initialized){
-			init()
-		}
-        
-        switch (index) {
-            case RunState.Forward: 
-                l_pulselen = servo_map(90+lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90-rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
-                break;
-            case RunState.Back: 
-                l_pulselen = servo_map(90-lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90+rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
-                break;
-            case RunState.Left: 
-                l_pulselen = servo_map(90+lspeed/4, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90-rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
-                break;
-            case RunState.Right: 
-                l_pulselen = servo_map(90+lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90-rspeed/4, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
-                break;
-            case RunState.Stop: 
-                l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
-                break;
-            
-        }
-    }
-
-    //% blockId=KSB048_Motor_Car
-    //% block="Motor_Car %index|L_speed %lspeed|R_speed %rspeed"
-    //% weight=87
-    //% lspeed.min=0 lspeed.max=255 rspeed.min=0 rspeed.max=255
-    export function Motor_Car(index: RunState, lspeed: number, rspeed: number): void {
-        switch (index) {
-            case RunState.Forward: 
-                Motor(MotorNum.M1B,lspeed);
-                Motor(MotorNum.M1A,rspeed);
-                break;
-            case RunState.Back: 
-                Motor(MotorNum.M1B,-lspeed);
-                Motor(MotorNum.M1A,-rspeed);
-                break;
-            case RunState.Left: 
-                Motor(MotorNum.M1B,lspeed/2);
-                Motor(MotorNum.M1A,rspeed);
-                break;
-            case RunState.Right: 
-                Motor(MotorNum.M1B,lspeed);
-                Motor(MotorNum.M1A,rspeed/2); 
-                break;
-            case RunState.Stop: 
-                Motor(MotorNum.M1B,0);
-                Motor(MotorNum.M1A,0);
-                break;
-            
-        }
-    }
-
-    
-    
- 
 	
 	
 

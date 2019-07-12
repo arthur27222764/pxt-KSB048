@@ -4,20 +4,16 @@
 	"KSB048.MotorNum.M1B|block": "左邊",
 	"KSB048.LedNum.L_LED|block": "左邊",
 	"KSB048.LedNum.R_LED|block": "右邊",
-	"KSB048.Track.Left|block": "左邊",
-	"KSB048.Track.Right|block": "右邊",
 	"KSB048.RunState.Forward|block": "前進",
 	"KSB048.RunState.Back|block": "後退",
 	"KSB048.RunState.Left|block": "左邊",
 	"KSB048.RunState.Right|block": "右邊",
 	"KSB048.RunState.Stop|block": "停止",
 	"KSB048.Ultrasonic|block": "超音波測距(公分)",
-	"KSB048.Read_Track|block": "循跡感測器 %sensor",
 	"KSB048.RGB_LED|block": "全彩燈",
 	"KSB048.Servo|block": "舵機 %channel|角度 %degree",
 	"KSB048.ServoRange|block": "舵機 %channel|角度 %degree|servomin %servomin|servomax %servomax",
-	"KSB048.Motor|block": "馬達 %channel|速度 %speed",
-	"KSB048.Servo_Car|block": "舵機車種 %index|左邊速度 %lspeed|右邊速度 %rspeed",
-	"KSB048.Motor_Car|block": "馬達車種 %index|左邊速度 %lspeed|右邊速度 %rspeed"
+	"KSB048.Motor|block": "馬達 %channel|速度 %speed"
+	
 	
 }
