@@ -26,13 +26,18 @@ namespace KSB048 {
         S10 = 10,
         S11 = 11,
      }
-    export enum MotorNum {
-        //% blockId="M1A" block="Right"
+     export enum MotorNum {
+        //% blockId="M1A" block="M1A"
         M1A = 0,
-        //% blockId="M1B" block="Left"
-		M1B = 1,
+        //% blockId="M1B" block="M1B"
+        M1B = 1,
+        //% blockId="M2A" block="M2A"
+        M2A = 2,
+        //% blockId="M2B" block="M2B"
+		M2B = 3,
 
     }
+
     export enum LedNum {
         //% blockId="Left_LED" block="Left"
         L_LED = 0,
@@ -219,15 +224,41 @@ namespace KSB048 {
     //% block="Motor channel %channel|speed %speed"
 	//% weight=85
 	//% speed.min=-255 speed.max=255
-	export function Motor(channel: MotorNum, speed: number): void {
+    export function Motor(channel: MotorNum, speed: number): void {
 		if(!initialized){
 			init()
         }
-        
+        let pwm1 =0;
+        let pwm2 =0;
         speed=motor_map(speed);
+
+        switch(channel){
+
+            case 0:{
+                pwm1 = 11;
+                pwm2 = 10;                
+                break;
+            }
+            case 1:{
+                pwm1 = 8;
+                pwm2 = 9;                
+                break;
+            }
+            case 2:{
+                pwm1 = 12;
+                pwm2 = 13;               
+                break;
+            }
+            case 3:{
+                pwm1 = 15;
+                pwm2 = 14;              
+                break;
+            }
+            
+        }
         
-		let pwm1 = (channel*2)+12;
-		let pwm2 = (channel*2)+13;
+		//let pwm1 = (channel*2)+12;
+		//let pwm2 = (channel*2)+13;
 		if(speed>=0){
 			setPwm(pwm1, 0, speed)
 			setPwm(pwm2, 0, 0)

@@ -1,7 +1,9 @@
 {
 	"KSB048|block": "KSB048",
-	"KSB048.MotorNum.M1A|block": "右邊",
-	"KSB048.MotorNum.M1B|block": "左邊",
+	"KSB048.MotorNum.M1A|block": "M1A",
+	"KSB048.MotorNum.M1B|block": "M1B",
+	"KSB048.MotorNum.M2A|block": "M2A",
+	"KSB048.MotorNum.M2B|block": "M2B",
 	"KSB048.LedNum.L_LED|block": "左邊",
 	"KSB048.LedNum.R_LED|block": "右邊",
 	"KSB048.RunState.Forward|block": "前進",
