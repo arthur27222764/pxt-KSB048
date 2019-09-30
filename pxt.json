@@ -1,6 +1,6 @@
 {
     "name": "KSB048",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Extension for KAISE KSRobot KSB048 4ch Motor Board",
     "license": "MIT", 
     "dependencies": {
