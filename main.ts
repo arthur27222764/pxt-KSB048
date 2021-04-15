@@ -38,6 +38,33 @@ namespace KSB048 {
 
     }
 
+    export enum MecanumState {
+        //% blockId="Go_Forward" block="Forward"
+        Forward = 0,
+        //% blockId="Car_Back" block="Backward"
+        Back = 1,
+        //% blockId="Go_Left" block="Left"
+        Left = 2,
+        //% blockId="GO_Right" block="Right"
+        Right = 3,
+        //% blockId="GO_Forward_Left" block="Forward_Left"
+        Forward_Left = 4,
+        //% blockId="GO_Forward_Right" block="Forward_Right"
+        Forward_Right = 5,
+        //% blockId="GO_Back_Left" block="Backward_Left"
+        Back_Left = 6,
+        //% blockId="GO_Back_Right" block="Backward_Right"
+        Back_Right = 7,
+        //% blockId="GO_Clockwise" block="Clockwise"
+        Clockwise = 8,
+        //% blockId="GO_Counterclockwise" block="Counterclockwise"
+        Counterclockwise = 9,
+        //% blockId="Go_Stop" block="Stop"
+        Stop = 10,
+
+    }
+
+
     export enum LedNum {
         //% blockId="Left_LED" block="Left"
         L_LED = 0,
@@ -135,46 +162,7 @@ namespace KSB048 {
         return x;
     }
     
-    //% blockId=KSB048_Frq_Set
-    //% block="PWM Frequency Set %frqval"
-    //% weight=99
-    export function Frq_Set(frqval:FrqState):void{
-       
-        if(!initialized){
-            init()
-        }
-        if(frqval==FrqState.A){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*0.92);
-    
-        }else if(frqval==FrqState.B){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*0.94);
-    
-        }else if(frqval==FrqState.C){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*0.96);
-                
-        }else if(frqval==FrqState.D){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*0.98);
-                
-        }else if(frqval==FrqState.E){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*1);
-                
-        }else if(frqval==FrqState.F){
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50*1.02);
-                
-        }
-    }
+
     
 
     //% blockId=KSB048_Ultrasonic 
@@ -309,81 +297,83 @@ namespace KSB048 {
         }
             
     }
-    //% blockId=PWM_DETECT_Frequency
-    //% block="DETECT Servo %channel Frequency to pin %iopin"
-    //% weight=80
-    export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number  {
-        let frq = 0;
-        let frqPinState = 0;
-        let prevFrqPinState = 0;
-        let oneSecond = 1000;
-        let timer = 0;
-        let ret_frq = 0;
-       
-        if(!initialized){
-			init()
+
+    //% blockId=KSB048_Mecanum_Car
+    //% block="Mecanum_Car %index|Speed %speed"
+    //% weight=87
+    //% speed.min=0 speed.max=255
+    export function Mecanum_Car(index: MecanumState, speed: number): void {
+        switch (index) {
+            case MecanumState.Forward:
+                Motor(MotorNum.M1B, speed);
+                Motor(MotorNum.M1A, speed);
+                Motor(MotorNum.M2B, speed);
+                Motor(MotorNum.M2A, speed);
+                break;
+            case MecanumState.Back:
+                Motor(MotorNum.M1B, -speed);
+                Motor(MotorNum.M1A, -speed);
+                Motor(MotorNum.M2B, -speed);
+                Motor(MotorNum.M2A, -speed);
+                break;
+            case MecanumState.Left:
+                Motor(MotorNum.M1B, -speed);
+                Motor(MotorNum.M1A, speed);
+                Motor(MotorNum.M2B, speed);
+                Motor(MotorNum.M2A, -speed);
+                break;
+            case MecanumState.Right:
+                Motor(MotorNum.M1B, speed);
+                Motor(MotorNum.M1A, -speed);
+                Motor(MotorNum.M2B, -speed);
+                Motor(MotorNum.M2A, speed);
+                break;
+            case MecanumState.Forward_Left:
+                Motor(MotorNum.M1B, 0);
+                Motor(MotorNum.M1A, speed);
+                Motor(MotorNum.M2B, speed);
+                Motor(MotorNum.M2A, 0);
+                break;
+            case MecanumState.Forward_Right:
+                Motor(MotorNum.M1B, speed);
+                Motor(MotorNum.M1A, 0);
+                Motor(MotorNum.M2B, 0);
+                Motor(MotorNum.M2A, speed);
+                break;
+            case MecanumState.Back_Left:
+                Motor(MotorNum.M1B, -speed);
+                Motor(MotorNum.M1A, 0);
+                Motor(MotorNum.M2B, 0);
+                Motor(MotorNum.M2A, -speed);
+                break;
+            case MecanumState.Back_Right:
+                Motor(MotorNum.M1B, 0);
+                Motor(MotorNum.M1A, -speed);
+                Motor(MotorNum.M2B, -speed);
+                Motor(MotorNum.M2A, 0);
+                break;
+            case MecanumState.Clockwise:
+                Motor(MotorNum.M1B, speed);
+                Motor(MotorNum.M1A, -speed);
+                Motor(MotorNum.M2B, speed);
+                Motor(MotorNum.M2A, -speed);
+                break;
+            case MecanumState.Counterclockwise:
+                Motor(MotorNum.M1B, -speed);
+                Motor(MotorNum.M1A, speed);
+                Motor(MotorNum.M2B, -speed);
+                Motor(MotorNum.M2A, speed);
+                break;
+            case MecanumState.Stop:
+                Motor(MotorNum.M1B, 0);
+                Motor(MotorNum.M1A, 0);
+                Motor(MotorNum.M2B, 0);
+                Motor(MotorNum.M2A, 0);
+                break;
+
         }
-        setPwm(channel, 0, SERVOMAX);
-        for(let i=0; i<2000 ; i++) {
-            frqPinState = pins.digitalReadPin(iopin)
-            if (frqPinState == 0) {
-                prevFrqPinState = 0
-            }
-            if (frqPinState == 1 && prevFrqPinState == 0) {
-                prevFrqPinState = frqPinState
-                frq = frq + 1
-            }
-            control.waitMicros(1000)
-            timer = timer + 1
-            if (timer > oneSecond) {
-                frq = frq-2
-                if (frq > 53) {
-                    //basic.showString("A")
-                    ret_frq= 65
-                } else {
-                    if (frq > 52) {
-                        //basic.showString("B")
-                        ret_frq= 66
-                    } else {
-                        if (frq > 51) {
-                            //basic.showString("C")
-                            ret_frq= 67
-                        } else {
-                            if (frq > 50) {
-                                //basic.showString("D")
-                                ret_frq=  68
-                            } else {
-                                if (frq > 49) {
-                                    //basic.showString("E")
-                                    ret_frq=  69
-                                } else {
-                                    if (frq > 48) {
-                                        //basic.showString("F")
-                                        ret_frq=  70
-                                    } else {
-                                        if(frq <= 48) {
-                                            //basic.showString("X")
-                                            ret_frq=  88
-
-                                        }
-                                    }
-                                        
-                                }
-                            }
-                        }
-                    }
-                }
-
-                frq = 0
-                timer = 0
-            }
-        }
-        return ret_frq
-        
-
     }
-	
-	
+ 
 
 
 }
